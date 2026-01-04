@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTRO 지식검색기</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="logo.png" type="image/png">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header-container">
+            <img src="io.png" alt="DTRO 로고" class="logo-img" onerror="this.style.display='none'">
+            <div class="header-text">
+                <h1>DTRO 지식검색기</h1>
+                <p class="header-subtitle">AI 기반 전력관제 지식 검색 허브</p>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <select id="searchMode">
+                <option value="question_or">질문 (OR)</option>
+                <option value="question_and">질문 (AND)</option>
+                <option value="answer_or">답변 (OR)</option>
+                <option value="answer_and">답변 (AND)</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="검색어를 입력하세요...">
+            <button id="addBtn">추가</button>
+            <button id="aiInsightBtn" class="ai-btn">✨ AI 인사이트</button>
+        </div>
+
+        <!-- AI 분석 결과 영역 -->
+        <div id="aiResultContainer" class="ai-result-container" style="display: none;">
+            <div class="ai-header">
+                <h3>🤖 AI 분석 결과</h3>
+                <button id="printInsightBtn" class="small-btn">인쇄</button>
+            </div>
+            <div id="aiResultContent" class="ai-content">
+                <!-- AI 응답이 여기에 표시됩니다 -->
+            </div>
+            <div class="ai-footer">
+                위 내용은 검색된 상위 50개 항목을 바탕으로 AI가 생성했습니다.
+            </div>
+        </div>
+
+        <h2 id="resultsTitle">검색 결과 (0개)</h2>
+        <div id="results"></div>
+    </div>
+
+    <div id="popup" class="popup" onclick="closePopup()">
+        <div class="popup-content" onclick="event.stopPropagation()">
+            <span class="close">&times;</span>
+            <div id="detailView">
+                <h2 id="popupTitle"></h2>
+                <p id="popupContent"></p>
+                <form id="detailForm">
+                    <button type="button" id="printBtn">인쇄</button>
+                    <button type="button" id="copyBtn">복사</button>
+                    <button type="button" id="closeDetailBtn">닫기</button>
+                </form>
+            </div>
+            <div id="editView" style="display: none;">
+                <h2>항목 편집</h2>
+                <form id="editForm">
+                    <input type="hidden" id="itemId">
+                    <label for="question">질문:</label>
+                    <textarea id="question" required></textarea>
+                    <label for="answer">답변:</label>
+                    <textarea id="answer" required></textarea>
+                    <button type="submit">저장</button>
+                    <button type="button" id="deleteBtn">삭제</button>
+                    <button type="button" id="closeBtn">닫기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
